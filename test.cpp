@@ -22,6 +22,8 @@ TEST_CASE ( "Rectangle Constructor", "[Rectangle]") {
   REQUIRE( r.get_p2().x == p2.x );
   REQUIRE( r.get_p1().y == p1.y );
   REQUIRE( r.get_p2().y == p2.y );
+  REQUIRE( r.get_p1().x <= r.get_p2().x );
+  REQUIRE( r.get_p1().y <= r.get_p2().y );
 }
 
 TEST_CASE ( "Get the width of the rectangle between p1.x and p2.x", "[GetWidth]") {
