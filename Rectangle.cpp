@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Rectangle.h"
 #include <cmath>
+<<<<<<< HEAD
 
 unsigned int Factorial( unsigned int number ){
   if(number > 1){
@@ -9,6 +10,8 @@ unsigned int Factorial( unsigned int number ){
     return 1;
   }
 }
+=======
+>>>>>>> 527bf8fb8cf44fd06ebab0ca2d5d56766c0cfb4e
 
 Rectangle::Rectangle(Point p1, Point p2){
   this->p1_ = p1;
