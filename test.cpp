@@ -114,6 +114,84 @@ TEST_CASE ( "Get Point p2", "[get_p2]") {
   REQUIRE(r.get_p2().y ==  p2.y);
 }
 
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+#include "catch.hpp"
+
+#include "Rectangle.h"
+
+TEST_CASE ( "Overlaps are determined", "[Overlaps]"){
+  //create two overlapping rectangles
+  Point one;
+  one.x = 0;
+  one.y = 0;
+  Point two;
+  two.x = 2;
+  two.y = 4;
+  Rectangle r (one, two);
+  Point oneTwo;
+  oneTwo.x = 1;
+  oneTwo.y = 1;
+  Point twoTwo;
+  twoTwo.x = 5;
+  twoTwo.y =5;
+  Rectangle t (oneTwo, twoTwo);
+  REQUIRE( r.Overlaps(t) == true);
+  REQUIRE( t.Overlaps(r) == true);
+  //Change points and create new rectangle so they do not overlap
+  oneTwo.x = 5;
+  oneTwo.y = 1;
+  twoTwo.x = 10;
+  twoTwo.y = 5;
+  Rectangle z (oneTwo, twoTwo);
+  Rectangle h (one, two);
+  REQUIRE( z.Overlaps(h) == false);
+  //Check to make sure two rectangles sharing a side are considered overlapping
+  one.x = 0;
+  one.y = 0;
+  two.x = 2;
+  two.y = 2;
+  oneTwo.x = 2;
+  oneTwo.y = 0;
+  twoTwo.x = 4;
+  twoTwo.y = 2;
+  Rectangle p (oneTwo, twoTwo);
+  Rectangle q (one, two);
+  REQUIRE( p.Overlaps(q) == true);
+}
+
+TEST_CASE ( "Area of rectangle is calculated", "[CalculateArea]"){
+  //create a rectangles with area of 0
+  Point one;
+  one.x = 0;
+  one.y = 0;
+  Point two;
+  two.x = 0;
+  two.y = 0;
+  Rectangle r (one, two);
+  REQUIRE( r.CalculateArea() == 0);
+  //change expected area to 4
+  one.x = 0;
+  one.y = 0;
+  two.x = 2;
+  two.y = 2;
+  Rectangle t(one, two);
+  REQUIRE( t.CalculateArea() == 4);
+  //change expected area to 4, but rectangle is made of points with negative dimensions
+  one.x = 0;
+  one.y = 0;
+  two.x = -2;
+  two.y = -2;
+  Rectangle z(two, one);
+  REQUIRE( z.CalculateArea() == 4);
+  //make a line and check Area
+  one.x = 1;
+  one.y = 1;
+  two.x = 5;
+  two.y = 1;
+  Rectangle k(one, two);
+  REQUIRE( k.CalculateArea() == 0);
+}
+
 TEST_CASE ( "Moves the bottom left coordinate down one and to the left one and moves the upper right coordinate up one and to the right one", "[Expand]") {
   Point p1;
   p1.x = 0;
